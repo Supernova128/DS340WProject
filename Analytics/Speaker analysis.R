@@ -1,7 +1,7 @@
 library(tidyverse)
 
 
-Speakerdataen <- read.csv("Speakerdataen.tsv", sep = "\t")
+Speakerdataen <- read.csv("Speakerdataen.tsv", sep = "\t") # File not included in repo due to size
 
 Speakerdataen %>%
     group_by(client_id) %>%
@@ -29,5 +29,34 @@ Speakerdataen %>%
 Speakerdataen %>%
     filter(client_id == "d7b8bd57a847b9f6a92eb975f2fe0a8686ee95a9e71b0168d5ee36090c94b373186a93d864491807465a14b0cb0cd867c6a52509095f73cb3c58490f0fb7f149")->
     MostvoiceBritish
+
+
+# Chinese - Hong Kong Speaker Analysis
+
+
+SpeakerdatazhHk <- read.csv("validated-zh-HK.tsv", sep = "\t")
+
+# Using only voices with at least 1000 samples
+
+SpeakerdatazhHk %>%
+    group_by(client_id) %>%
+    summarise(count = n()) ->
+    numberofclients 
+
+Touse <- numberofclients %>%
+    filter(count >= 1000)
+
+Files <- SpeakerdatazhHk %>%
+    filter(client_id %in% Touse$client_id)
+
+
+write_csv(Files,file = 'zh-HKSpeakers.csv')
+
+
+
+
+
+
+
 
 
