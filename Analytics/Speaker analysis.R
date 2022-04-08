@@ -50,8 +50,13 @@ Files <- SpeakerdatazhHk %>%
     filter(client_id %in% Touse$client_id)
 
 
+Filesone <- SpeakerdatazhHk %>%
+    filter(client_id == '86cc6475668b2a793629483531f1e34c803727e0e5d588491caf28cc558b5304e4aa045f392c6e6cc3263f1cfd0ea767a503680fbd385e9247f80b8bb42652d9')%>%
+    select(path,sentence)
+
 write_csv(Files,file = 'zh-HKSpeakers.csv')
 
+write.table(Filesone,file = 'zh-HKSpeaker.txt',sep = '|',col.names = FALSE,row.names = FALSE)
 
 
 
