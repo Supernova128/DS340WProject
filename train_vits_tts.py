@@ -14,12 +14,14 @@ from TTS.utils.audio import AudioProcessor
 
 output_path = os.getcwd()
 
-mailabs_path = output_path "mailabs/**"
-dataset_paths = glob(mailabs_path)
-dataset_config = [
-    BaseDatasetConfig(name="mailabs", meta_file_train=None, path=path, language=path.split("/")[-1])
-    for path in dataset_paths
-]
+# DEFINE DATASET CONFIG
+# Set LJSpeech as our target dataset and define its path.
+# You can also use a simple Dict to define the dataset and pass it to your custom formatter.
+dataset_config = BaseDatasetConfig(
+    name="kokoro", meta_file_train="kokoro", path=os.path.join(output_path, "../datasets/kokoro")
+)
+
+
 
 audio_config = BaseAudioConfig(
     sample_rate=16000,
@@ -36,7 +38,7 @@ audio_config = BaseAudioConfig(
     spec_gain=1.0,
     signal_norm=True,
     do_amp_to_db_linear=False,
-    resample=False,
+    resample=True,
 )
 
 vitsArgs = VitsArgs(
