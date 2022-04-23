@@ -1,3 +1,6 @@
 [submodule "TTS"]
 	path = TTS
 	url = https://github.com/coqui-ai/TTS
+[submodule "Opus-MT"]
+	path = Opus-MT
+	url = https://github.com/Helsinki-NLP/Opus-MT.git
