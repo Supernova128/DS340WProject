@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# The PBS directives 
+#SBATCH -J TTStrain
+#SBATCH -N 1
+#SBATCH -o TTStrain.%j.out
+#SBATCH -p GPU-shared
+#SBATCH -t 12:00:00
+#SBATCH --gres=gpu:v100-32:1
+
+cd $PROJECT 
+
+cd DS340WProject/YourTTSTrainingGerman
+
+echo "#-#-#Job started on `hostname` at `date` "
+
+echo "#-#-#execution started at `date`"
+
+CUDA_VISIBLE_DEVICES="0" python ../TTS/TTS/bin/train_tts.py --config_path config.json --restore_path checkpoints/vits_tts-german-April-26-2022_12+11PM-39b9d72/checkpoint_50000.pth
+
+echo "Job complete"
+
